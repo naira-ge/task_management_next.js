@@ -7,7 +7,7 @@ export type TaskProps = {
 
 export type ToDoProps = {
   todo: TaskProps;
-  toggleTask: () => void;
-  removeTask: () => void;
+  toggleTask: (id: string | number) => void;
+  removeTask: (id: string | number) => void;
 }
 

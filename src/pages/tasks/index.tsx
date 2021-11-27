@@ -7,35 +7,34 @@ import ToDo from 'components/ToDo';
 import { TaskProps } from 'components/ToDo/types';
 
 function Tasks (){
-  const [ todos, setTodos ] = useState<TaskProps[]>( [] );
+  const [ todoList, setTodoList ] = useState<TaskProps[]>( [] );
   
   const addTask = useCallback( (userInput) => {
     if ( userInput ) {
-      const newItem = {
+      const newItem: TaskProps  = {
         id: Math.random().toString( 36 ).substring(2, 9),
         task: userInput,
         isComplete: false,
       };
-      setTodos( [ ...todos, newItem ] );
+      setTodoList( [ ...todoList, newItem ] );
     }
-  }, [todos] );
+  }, [todoList] );
 
-  const removeTask = useCallback( () =>
-  {
-    
+  const removeTask = useCallback( (taskId) => {
+      setTodoList( [...todoList?.filter( ( todo ) => todo.id !== taskId )] );
   }, [] );
 
-  const handleToggle = useCallback( () =>
-  {
-    
+  const handleToggle = useCallback( (taskId) => {
+    setTodoList( [ ...todoList?.map( ( todo ) =>
+      todo.id !== taskId ? {...todo, isComplete: !todo.isComplete} : todo
+    ) ] )
   }, [] );
 
   return (
     <>
-      <h2>The Tasks {todos?.length}</h2>
+      <h2>The Tasks {todoList?.length}</h2>
       <ToDoForm addTask={ addTask }/>
-        { todos?.map( (todo) =>
-        {
+        { todoList?.map( (todo) => {
           return (
             <ToDo
             key={ todo.id }

@@ -6,7 +6,7 @@ import { ToDoFormProps } from './types';
 
 function ToDoForm ({addTask} : ToDoFormProps)
 {
-  const [ userInput, setUserInput ] = useState( '' );
+  const [ userInput, setUserInput ] = useState('' );
 
   const handleChange = (e: BaseSyntheticEvent) => {
     setUserInput( e.target.value );
