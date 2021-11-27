@@ -1,4 +1,6 @@
-import { useState, BaseSyntheticEvent } from 'react';
+import { BaseSyntheticEvent } from 'react';
+import { useInput } from 'hooks/useInput';
+
 import Input from 'components/Input';
 import Button from 'components/Button';
 
@@ -6,7 +8,7 @@ import { ToDoFormProps } from './types';
 
 function ToDoForm ({addTask} : ToDoFormProps)
 {
-  const [ userInput, setUserInput ] = useState('' );
+  const [ userInput, setUserInput ] = useState('');
 
   const handleChange = (e: BaseSyntheticEvent) => {
     setUserInput( e.target.value );
