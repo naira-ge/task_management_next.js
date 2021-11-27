@@ -25,10 +25,12 @@ function Tasks (){
   }, [] );
 
   const handleToggle = useCallback( (taskId) => {
-    setTodoList( [ ...todoList?.map( ( todo ) =>
-      todo.id !== taskId ? {...todo, isComplete: !todo.isComplete} : todo
-    ) ] )
-  }, [] );
+    setTodoList( [ ...todoList?.map( ( todo ) => (
+      todo.id === taskId ? { ...todo, isComplete: !todo.isComplete } : todo
+    )) ] )
+  }, [todoList] );
+
+  console.log( 'todoList', todoList );
 
   return (
     <>

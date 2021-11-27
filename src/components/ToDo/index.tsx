@@ -13,7 +13,9 @@ function ToDo ( { todo, toggleTask, removeTask }: ToDoProps )
       <div>
         {todo.task}
       </div>
-      <AiOutlineDelete onClick={() => removeTask(todo.id)}/>
+      <div className="item-delete" onClick={ () => removeTask( todo.id ) }>
+        <AiOutlineDelete />
+      </div>
     </div>
   )
 }
