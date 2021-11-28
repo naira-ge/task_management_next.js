@@ -1,13 +1,13 @@
 import { useState, useCallback } from 'react';
-import Link from 'next/link';
 
 import ToDoForm from 'components/ToDoForm';
 import ToDo from 'components/ToDo';
+import { AnyObject } from 'utils/types';
 
 import { TaskProps } from 'components/ToDo/types';
 
-function Tasks (){
-  const [ todoList, setTodoList ] = useState<TaskProps[]>( [] );
+function Tasks ({tasks}:TaskProps[]){
+  const [ todoList, setTodoList ] = useState<TaskProps[]>( tasks );
   
   const addTask = useCallback( (userInput) => {
     if ( userInput ) {
@@ -49,6 +49,15 @@ function Tasks (){
       </ul>
     </>
   )
+}
+
+export async function getServerSideProps (context: AnyObject) {
+  
+  return {
+    props: {
+      tasks: [],
+    }
+  };
 }
 
 export default Tasks;
