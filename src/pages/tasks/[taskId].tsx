@@ -1,9 +1,13 @@
 import { useRouter } from 'next/router';
 
-function Task() {
+function Task () {
+  const { query } = useRouter();
+
+  const taskId = query.taskId;
+
   return (
     <div>
-      Task
+      Task {taskId}
     </div>
   )
 }

@@ -35,7 +35,8 @@ function Tasks (){
   return (
     <>
       <h2>The Tasks {todoList?.length}</h2>
-      <ToDoForm addTask={ addTask }/>
+      <ToDoForm addTask={ addTask } />
+      <ul>
         { todoList?.map( (todo) => {
           return (
             <ToDo
@@ -45,6 +46,7 @@ function Tasks (){
             removeTask={ removeTask } />
           )
         })}
+      </ul>
     </>
   )
 }

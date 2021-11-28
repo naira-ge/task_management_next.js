@@ -1,9 +1,9 @@
-import { BaseSyntheticEvent, ReactNode } from 'react';
+import { BaseSyntheticEvent, KeyboardEvent, ReactNode } from 'react';
 
 export interface IBaseInputProps {
   onChange: ( event: BaseSyntheticEvent ) => void;
   onBlur: ( event: BaseSyntheticEvent ) => void;
-  onKeyDown?: ( event: BaseSyntheticEvent ) => void;
+  onKeyDown?: ( event: KeyboardEvent<HTMLInputElement> ) => void;
   name?: string;
   value: string | number;
   className?: string;

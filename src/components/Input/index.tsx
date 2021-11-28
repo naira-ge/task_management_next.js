@@ -14,7 +14,7 @@ function Input ( {
 }: IBaseInputProps) {
   return (
     <div className={className} >
-      <label>
+      <label>{label}</label>
         <input
           placeholder={placeholder}
           type={type}
@@ -24,8 +24,6 @@ function Input ( {
           autoComplete={autoComplete}
           {...handlers}
         />
-        {label}
-      </label>
       <span>{error}</span>
     </div>
   );
