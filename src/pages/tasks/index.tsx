@@ -1,4 +1,4 @@
-import {  useState , useCallback } from 'react';
+import {  useState , useEffect, useCallback } from 'react';
 import { useSortableData } from 'hooks/useSortableData';
 import { usePagination } from 'hooks/usePagination';
 import { BsSortAlphaDown, BsSortAlphaUp } from "react-icons/bs";
@@ -22,7 +22,40 @@ function Tasks (props){
     } );
   const [ sortDown, setSortDown ] = useState( true );
 
-  const dataTasks = items?.slice(firstContentIndex, lastContentIndex);
+  const getTasks = async () => {
+    try {
+      const response = await fetch( '/api/tasks', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      } );
+
+      const data = await response.json();
+      if ( data ) {
+        setTodoList( data.data );
+      }
+    } catch ( error ) {
+      console.trace( error );
+    }
+  }
+
+  useEffect( () =>
+  {
+    let unmounted = false;
+
+    if ( !unmounted )
+    {
+      getTasks();
+    }
+
+    return () =>
+    {
+      unmounted = true;
+    };
+  }, [] );
+
+  const dataTasks = items?.slice( firstContentIndex, lastContentIndex );
   
   const addTask = useCallback( async (userInput) => {
     if ( userInput ) {
@@ -42,7 +75,7 @@ function Tasks (props){
       } );
 
       const data = await response.json();
-      setTodoList([...todoList, newItem]);
+      setTodoList([...todoList, data.result]);
     }
   }, [todoList] );
 
@@ -87,7 +120,7 @@ function Tasks (props){
                 totalPages={totalPages}
             />
             <Button className={styles.sort} onClick={ handleSort }>
-              {sortDown ? <BsSortAlphaDown /> : <BsSortAlphaUp />}
+              {sortDown ?  <BsSortAlphaUp /> : <BsSortAlphaDown />}
             </Button>
         </span>
       </div>
@@ -97,7 +130,7 @@ function Tasks (props){
             { dataTasks?.map( (todo) => {
               return (
                 <ToDo
-                key={ todo.id }
+                key={ todo?.id }
                 todo={ todo }
                 toggleTask={ handleToggle } 
                 removeTask={ removeTask } 
@@ -112,15 +145,6 @@ function Tasks (props){
 
 export async function getServerSideProps ( context: AnyObject ){
   
-  // const response = await fetch( 'http://localhost:3000/api/tasks', {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //     } );
-
-  //     const data = await response.json();
-
   return {
     props: {
       tasks: [],

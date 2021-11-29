@@ -18,10 +18,10 @@ async function handlerTask(
     const db = client.db();
 
     const tasksCollection = db.collection( 'tasks' );
-      const selectedTask = await tasksCollection.findOne( { _id });
-    client.close();
+      const data = await tasksCollection.findOne( { _id });
+      client.close();
 
-    res.status( 200 ).json( {selectedTask} )
+    res.status( 200 ).json( {data} )
     }
   } catch (error) {
     console.log(error);

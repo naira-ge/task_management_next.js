@@ -17,10 +17,10 @@ async function handlerTasks(
       const db = client.db();
 
     const tasksCollection = db.collection( 'tasks' );
-    const result = await tasksCollection.find({}).toArray();
+    const data = await tasksCollection.find().toArray();
     client.close();
 
-    res.status( 200 ).json( {result} )
+    res.status( 200 ).json( {data} )
     }
   } catch (error) {
     console.log(error);
