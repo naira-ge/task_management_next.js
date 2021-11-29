@@ -19,7 +19,6 @@ const Home: NextPage = () => {
     event.preventDefault();
 
     const data = { email: email, password: password };
-    console.log( email, password );
 
     sessionStorage.setItem( "TaskManagement",
       JSON.stringify( { ...data } )

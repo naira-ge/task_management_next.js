@@ -13,8 +13,6 @@ type UserInfo = AnyObject;
 export default function App( { Component, pageProps, userInfo }: AppProps & UserInfo ) {
   const [ auth, setAuth ] = useState( userInfo );
 
-  console.log( 'auth', auth );
-
   const setCredentials = useCallback(credentials => {
     setAuth({ ...credentials });
   }, []);
@@ -34,8 +32,7 @@ export default function App( { Component, pageProps, userInfo }: AppProps & User
 }
 
 App.getInitialProps = async ( { ctx }: AppContext ) =>{
-  try
-  {
+  try {
     //   const response = await fetch( 'http://localhost:3000/api/user/info', {
     //   method: 'GET',
     // } );

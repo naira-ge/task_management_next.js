@@ -102,10 +102,6 @@ function Tasks (props){
     requestSort( 'task' );
   }
 
-  console.log( 'todoList', todoList );
-
-  
-
   return (
     <div className={ styles.container }>
       <div className={styles.wrapper}>
@@ -130,7 +126,7 @@ function Tasks (props){
             { dataTasks?.map( (todo) => {
               return (
                 <ToDo
-                key={ todo?.id }
+                key={ todo?.id || todo?._id }
                 todo={ todo }
                 toggleTask={ handleToggle } 
                 removeTask={ removeTask } 
