@@ -1,4 +1,5 @@
 import { IBaseInputProps } from './types';
+import styles from './styles.module.scss';
 
 function Input ( {
   className,
@@ -15,16 +16,17 @@ function Input ( {
   return (
     <div className={className} >
       <label>{label}</label>
-        <input
+      <input
           placeholder={placeholder}
           type={type}
           name={name}
           value={value}
           required={required}
           autoComplete={autoComplete}
+          className={styles.input}
           {...handlers}
         />
-      <span>{error}</span>
+      <p className={styles.error}>{error}</p>
     </div>
   );
 }
