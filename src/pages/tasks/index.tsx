@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import {  useState , useCallback } from 'react';
 import { useSortableData } from 'hooks/useSortableData';
 import { usePagination } from 'hooks/usePagination';
 import { BsSortAlphaDown, BsSortAlphaUp } from "react-icons/bs";
@@ -9,11 +9,11 @@ import Pagination from 'components/Pagination';
 import { AnyObject } from 'utils/types';
 
 import styles from 'styles/Tasks.module.scss';
-import { TaskProps } from 'components/ToDo/types';
+import {TaskProps} from 'utils/types';
 import Button from 'components/Button';
 
-function Tasks ({ tasks }:TaskProps[]){
-  const [ todoList, setTodoList ] = useState<TaskProps[]>( tasks );
+function Tasks (props){
+  const [ todoList, setTodoList ] = useState<TaskProps[]>( props?.tasks );
   const { items, requestSort, sortConfig } = useSortableData(todoList);
   const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, setPage, totalPages } =
     usePagination({
@@ -31,8 +31,9 @@ function Tasks ({ tasks }:TaskProps[]){
         task: userInput,
         isComplete: false,
       };
-      setTodoList([...todoList, newItem]);
-      const response = await fetch( '/api/new-task', {
+      setTodoList( [ ...todoList, newItem ] );
+      
+      const response = await fetch( '/api/tasks/new-task', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

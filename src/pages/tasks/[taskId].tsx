@@ -1,12 +1,11 @@
 import { AnyObject } from 'utils/types';
 
-function Task ({taskData}: AnyObject) {
+function Task (props : AnyObject) {
 
-  const taskId = taskData.taskId;
 
   return (
     <h3>
-      Task {taskId}
+      Task {props?.taskId}
     </h3>
   )
 }
@@ -16,7 +15,7 @@ export async function getServerSideProps ( context: AnyObject ){
 
   return {
     props: {
-      taskData: {taskId},
+      taskId,
     }
   }
 }

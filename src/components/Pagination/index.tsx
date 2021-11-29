@@ -9,7 +9,7 @@ function Pagination({ className, nextPage, prevPage, page, setPage, totalPages }
       <button onClick={prevPage} className={page === 1 ? styles.disabled : styles.page }>
         <BiCaretLeft />
       </button>
-      {[...Array(totalPages).keys()].map(el => (
+      {/* [...Array(totalPages).keys()]?.map(el => (
         <button
           onClick={() => setPage(el + 1)}
           key={el}
@@ -17,7 +17,7 @@ function Pagination({ className, nextPage, prevPage, page, setPage, totalPages }
         >
           {el + 1}
         </button>
-      ))}
+      )) */}
       <button onClick={nextPage} className={page === totalPages ? styles.disabled : styles.page}>
         <BiCaretRight />
       </button>

@@ -2,13 +2,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { MongoClient } from 'mongodb';
 
-type Data = {
-  message: string
-}
 
 async function handlerNewTask(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 )
 {
   try
