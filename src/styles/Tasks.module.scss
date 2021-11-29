@@ -1,29 +1,28 @@
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
+@import './variables';
 
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 
 .title {
   margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
+  line-height: 1;
+  font-size: 1.6rem;
   text-align: center;
-}
 
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
+  .count {
+  color: $clr-primary-3;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: underline;
+  }
+}
 }
 
 .grid {
@@ -36,14 +35,15 @@
 
 .card {
   margin: 1rem;
-  padding: 1.5rem;
-  background: #adacf7;
-  width: 150px;
+  padding: 0.3rem;
+  background: $clr-primary-4;
+  width: 190px;
   height: 100px;
   text-align: left;
-  color: inherit;
+  color: $clr-grey-2;
+  font-weight: 600;
   text-decoration: none;
-  border: 1px solid #2927a3;
+  border: 1px solid $clr-primary-3;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 300px;
@@ -54,6 +54,7 @@
 .card:active {
   color: #0070f3;
   border-color: #0070f3;
+  transform:scale(0.98);
 }
 
 .card h2 {

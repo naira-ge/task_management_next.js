@@ -5,9 +5,9 @@ function Task ({taskData}: AnyObject) {
   const taskId = taskData.taskId;
 
   return (
-    <div>
+    <h3>
       Task {taskId}
-    </div>
+    </h3>
   )
 }
 

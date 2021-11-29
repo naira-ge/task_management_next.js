@@ -1,0 +1,32 @@
+@import 'styles/_variables';
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+
+    .delete{
+        margin-left:auto;
+        color: $clr-grey-2;
+        display: flex;
+
+        svg{
+            margin: 0 0.3rem;
+
+            &:hover {
+                transform: scale(1.02);
+                color: $clr-primary-2;
+            }
+        }
+    }
+
+    .more{
+        margin-left:auto;
+        color: $clr-grey-2;
+    }
+
+    .strike{
+        -webkit-text-decoration-line: line-through; /* Safari */
+        text-decoration-line: line-through; 
+    }
+}

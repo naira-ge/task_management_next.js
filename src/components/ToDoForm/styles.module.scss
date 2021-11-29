@@ -1,0 +1,46 @@
+@import 'styles/_variables';
+
+.share{
+    width: 60vw;
+    border-radius:$radius;
+    background-color: $clr-grey-8;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    margin-bottom: 0.5rem;
+
+    .form{
+        padding:.1rem;
+        display:flex;
+        align-items:center;
+
+        .shareInput{
+            width: 99%;
+            display:flex;
+            flex-flow: column nowrap;
+            padding:0.2rem;
+        }
+
+        .shareButton{
+            border:none;
+            font-size:1.1rem;
+            font-weight:600;
+            color:$clr-grey-5;
+            margin:0 0.5rem;
+            cursor: pointer;
+            background-color:inherit;
+            border:none;
+
+                &:hover,
+                &:active{
+                    color: $clr-primary-3;
+                    transform: scale(0.98);
+                }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+  .share{
+    width: 83vw;
+  }
+}

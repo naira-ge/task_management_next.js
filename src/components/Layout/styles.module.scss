@@ -5,30 +5,23 @@
 }
 
 .main {
-  min-height: calc(100vh - 110px);
-  padding: 4rem 0;
-  flex: 1;
+  min-height: calc(100vh - 107px);
+  padding: 1rem 0;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
 .footer {
   display: flex;
   flex: 1;
-  padding: 1rem 0;
+  padding: 0.8rem 0;
   height: 50px;
   background: linear-gradient($clr-primary-2, $clr-primary-1);
   justify-content: center;
   align-items: center;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
 }
 
 .navbar{
@@ -37,7 +30,7 @@
     height: 60px;
     background: linear-gradient($clr-primary-1, $clr-primary-2);
     display:grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 2.5fr 1fr;
     align-items:center;
     position:sticky;
     top:0;
@@ -54,7 +47,7 @@
         color:white;
         line-height: 1.3rem;
         font-weight: 800;
-        cursor:pointer;
+        cursor: pointer;
         text-decoration: none;
 
       .logoImg{
@@ -64,11 +57,40 @@
       }
     }
     .navRight{
-      margin-left: auto;
       padding: 0 1rem;
       color:white;
       line-height: 1rem;
       font-weight: 500;
       cursor: pointer;
+
+      .navMenu{
+        display: flex;
+        justify-content: space-between;
+
+        .userInfo{
+          margin: 0 0.9rem;
+        }
+
+        .logOut{
+          margin-left: auto;
+        }
+      }
     }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    .navLeft{
+      font-size: 1rem;
+      margin-left: 1rem;
+      line-height: 1rem;
+      font-weight: 800;
+
+      .logoImg{
+            margin-right: .1rem;
+            font-size: 1.2rem;
+      }
+    }
+    
+  }
 }

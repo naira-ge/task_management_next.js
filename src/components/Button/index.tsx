@@ -10,7 +10,7 @@ function Button ( {
 }: ButtonProps) {
   return (
     <button className={className} disabled={disabled} onClick={onClick}>
-      {/*loading ? <SpinnerIcon /> :*/ title || children}
+      { title || children}
     </button>
   );
 }

@@ -1,0 +1,36 @@
+@import 'styles/_variables';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    font-weight: bold;
+    background-color: $clr-grey-10;
+    border-radius: 3px;
+    color: $clr-primary-3;
+    border: 1px solid $clr-primary-4;
+    cursor: pointer;
+  }
+
+  button .active,
+  button:hover {
+    background-color: $clr-grey-6;
+    color: $clr-grey-10;
+    transform: scail(0.98);
+  }
+
+  button .disabled {
+    background-color: transparent !important;
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+}
+

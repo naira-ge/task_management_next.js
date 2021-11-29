@@ -19,20 +19,19 @@ function Layout({
     const { push } = useRouter();
     const { credentials, setCredentials } = useContext(AuthContext);
 
-  useEffect( () =>
-  { 
-    const user = sessionStorage.getItem( "TaskManagement" );
-    if ( !user || !credentials ){
-        push('/');
-      }
-      
-      setCredentials( JSON.parse(user) );
-  }, [] );
-  
+    useEffect( () => { 
+        const user = sessionStorage.getItem( "TaskManagement" );
+        if ( !user || !credentials ){
+            push('/');
+        }
+        user && setCredentials( JSON.parse( user ) );
+    }, [setCredentials] );
 
-  const handleLogOut = () => {
-      sessionStorage.removeItem( "TaskManagement" );
-  }
+
+    const handleLogOut = () => {
+        sessionStorage.removeItem( "TaskManagement" );
+        push('/');
+    }
   
   return (
     <div className={styles.container}>
@@ -43,16 +42,21 @@ function Layout({
       </Head>
         <header>
         <nav className={ styles.navbar }>
-          <div className = {styles.navLeft}>
-              <span className = {styles.logo}><FaHubspot className = {styles.logoImg}/> Task Management</span>
-          </div>
-          <div className = {styles.navRight} onClick={handleLogOut}>
-            { credentials?.email ? "Log Out" : null }
-          </div>
+            <div className = {styles.navLeft}>
+                <span className = {styles.logo}><FaHubspot className = {styles.logoImg}/> Task Management</span>
+            </div>
+            <div className = {styles.navRight} >
+                    { credentials?.email ?
+                        <div className = {styles.navMenu}>
+                            <span className={styles.userInfo}>{credentials?.email || ""}</span>
+                            <span className={styles.logOut} onClick={ handleLogOut }>Log Out</span>
+                        </div>
+                        : null }
+            </div>
         </nav>
         </header>
         <main className={styles.main}>
-          {children}
+            {children}
         </main>
         <footer className={styles.footer}>
         <span className={styles.logo}>

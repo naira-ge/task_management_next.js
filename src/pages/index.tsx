@@ -25,7 +25,7 @@ const Home: NextPage = () => {
       JSON.stringify( { ...data } )
     );
     
-     push( '/tasks' );
+      push( '/tasks' );
   }
 
   return (

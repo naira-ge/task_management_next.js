@@ -1,14 +1,25 @@
 import { useState, useCallback } from 'react';
+import { useSortableData } from 'hooks/useSortableData';
+import { usePagination } from 'hooks/usePagination';
 
 import ToDoForm from 'components/ToDoForm';
 import ToDo from 'components/ToDo';
+import Pagination from 'components/Pagination';
 import { AnyObject } from 'utils/types';
 
 import styles from 'styles/Tasks.module.scss';
 import { TaskProps } from 'components/ToDo/types';
 
-function Tasks ({tasks}:TaskProps[]){
+function Tasks ({ tasks }:TaskProps[]){
   const [ todoList, setTodoList ] = useState<TaskProps[]>( tasks );
+  const { items, requestSort, sortConfig } = useSortableData(todoList);
+  const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, setPage, totalPages } =
+    usePagination({
+      contentPerPage: 9,
+      count: items?.length,
+    });
+
+  const dataTasks = items?.slice(firstContentIndex, lastContentIndex);
   
   const addTask = useCallback( async (userInput) => {
     if ( userInput ) {
@@ -31,9 +42,10 @@ function Tasks ({tasks}:TaskProps[]){
     }
   }, [todoList] );
 
-  const removeTask = useCallback( (taskId) => {
-      setTodoList( [...todoList?.filter( ( todo ) => todo.id !== taskId )] );
-  }, [] );
+  const removeTask = useCallback( ( taskId ) => {
+    const newTodos = todoList?.filter( ( todo ) => todo.id !== taskId );
+      setTodoList(newTodos);
+  }, [todoList] );
 
   const handleToggle = useCallback( (taskId) => {
     setTodoList( [ ...todoList?.map( ( todo ) => (
@@ -41,27 +53,46 @@ function Tasks ({tasks}:TaskProps[]){
     )) ] )
   }, [todoList] );
 
+  const searchTask = useCallback( ( search: string ) => {
+    const searchResult = todoList?.filter( todo => {
+      todo.task?.toLowerCase().includes( search.toLowerCase() )
+    } );
+    setTodoList(searchResult);
+  }, [] );
+
   console.log( 'todoList', todoList );
 
+  
+
   return (
-    <>
-      <div>
-        <h3 className={styles.title}>The Tasks {todoList?.length}</h3>
-        <ToDoForm addTask={ addTask } />
+    <div className={ styles.container }>
+      <div className={styles.wrapper}>
+      <ToDoForm addTask={ addTask } searchTask={ searchTask } />
+      <Pagination
+            contentPerPage={9}
+            nextPage={nextPage}
+            prevPage={prevPage}
+            page={page}
+            setPage={setPage}
+            totalPages={totalPages}
+        />
       </div>
-      <ul className={styles.grid}>
-        { todoList?.map( (todo) => {
-          return (
-            <ToDo
-            key={ todo.id }
-            todo={ todo }
-            toggleTask={ handleToggle } 
-            removeTask={ removeTask } 
-            className={styles.card} />
-          )
-        })}
-      </ul>
-    </>
+      <div>
+        <h3 className={styles.title}>ToDo Tasks <span className={styles.count}>{dataTasks?.length}</span></h3>
+        <ul className={ styles.grid }>
+            { dataTasks?.map( (todo) => {
+              return (
+                <ToDo
+                key={ todo.id }
+                todo={ todo }
+                toggleTask={ handleToggle } 
+                removeTask={ removeTask } 
+                className={styles.card} />
+              )
+            })}
+          </ul>
+      </div>
+    </div>
   )
 }
 

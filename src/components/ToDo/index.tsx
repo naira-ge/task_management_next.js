@@ -1,5 +1,6 @@
 import Link  from 'next/link';
 import { AiOutlineDelete } from "react-icons/ai";
+import { MdOutlineDoneOutline } from "react-icons/md";
 
 import styles from "./styles.module.scss";
 
@@ -10,14 +11,20 @@ function ToDo ( { todo, toggleTask, removeTask, className }: ToDoProps ){
   return (
     <li 
       className={ className }
-      onClick={() => toggleTask(todo.id)}
     >
-      <div className={ todo.isComplete ? "item-text strike" : "item-text" }>
-        { todo.task }
-        <Link href={ `/tasks/${ todo.id}` }>Show more &rarr;.</Link>
-      </div>
-      <div className="item-delete" onClick={ () => removeTask( todo.id ) }>
-        <AiOutlineDelete />
+      <div className={styles.wrapper}>
+        <div className={ styles.delete} >
+          <MdOutlineDoneOutline onClick={() => toggleTask(todo.id)}/>
+          <AiOutlineDelete onClick={ () => removeTask( todo.id ) } />
+        </div>
+        <p className={ todo.isComplete ? styles.strike : styles.text }>
+          { todo.task }
+        </p>
+        <Link href={ `/tasks/${ todo.id }` } passHref>
+          <p className={ styles.more}>
+            &rarr;
+          </p>
+        </Link>
       </div>
     </li>
   )
