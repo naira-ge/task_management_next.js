@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useSortableData } from 'hooks/useSortableData';
 import { usePagination } from 'hooks/usePagination';
+import { BsSortAlphaDown, BsSortAlphaUp } from "react-icons/bs";
 
 import ToDoForm from 'components/ToDoForm';
 import ToDo from 'components/ToDo';
@@ -9,15 +10,17 @@ import { AnyObject } from 'utils/types';
 
 import styles from 'styles/Tasks.module.scss';
 import { TaskProps } from 'components/ToDo/types';
+import Button from 'components/Button';
 
 function Tasks ({ tasks }:TaskProps[]){
   const [ todoList, setTodoList ] = useState<TaskProps[]>( tasks );
   const { items, requestSort, sortConfig } = useSortableData(todoList);
   const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, setPage, totalPages } =
     usePagination({
-      contentPerPage: 9,
+      contentPerPage: 6,
       count: items?.length,
-    });
+    } );
+  const [ sortDown, setSortDown ] = useState( true );
 
   const dataTasks = items?.slice(firstContentIndex, lastContentIndex);
   
@@ -55,10 +58,15 @@ function Tasks ({ tasks }:TaskProps[]){
 
   const searchTask = useCallback( ( search: string ) => {
     const searchResult = todoList?.filter( todo => {
-      todo.task?.toLowerCase().includes( search.toLowerCase() )
+      todo.task?.toString().toLowerCase().includes( search.toString().toLowerCase() )
     } );
     setTodoList(searchResult);
   }, [] );
+
+  const handleSort = () => {
+    setSortDown(prev => !prev);
+    requestSort( 'task' );
+  }
 
   console.log( 'todoList', todoList );
 
@@ -67,15 +75,20 @@ function Tasks ({ tasks }:TaskProps[]){
   return (
     <div className={ styles.container }>
       <div className={styles.wrapper}>
-      <ToDoForm addTask={ addTask } searchTask={ searchTask } />
-      <Pagination
-            contentPerPage={9}
-            nextPage={nextPage}
-            prevPage={prevPage}
-            page={page}
-            setPage={setPage}
-            totalPages={totalPages}
-        />
+        <ToDoForm addTask={ addTask } searchTask={ searchTask } />
+        <span className={styles.pagination}>
+          <Pagination
+                contentPerPage={6}
+                nextPage={nextPage}
+                prevPage={prevPage}
+                page={page}
+                setPage={setPage}
+                totalPages={totalPages}
+            />
+            <Button className={styles.sort} onClick={ handleSort }>
+              {sortDown ? <BsSortAlphaDown /> : <BsSortAlphaUp />}
+            </Button>
+        </span>
       </div>
       <div>
         <h3 className={styles.title}>ToDo Tasks <span className={styles.count}>{dataTasks?.length}</span></h3>

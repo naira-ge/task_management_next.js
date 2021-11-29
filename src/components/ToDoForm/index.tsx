@@ -21,7 +21,6 @@ function ToDoForm ( { addTask, searchTask }: ToDoFormProps ){
   const handleSearch = (event: BaseSyntheticEvent) =>{
     event.preventDefault();
     searchTask( value );
-    onChange(event);
   }
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) =>{

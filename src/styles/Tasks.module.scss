@@ -4,7 +4,12 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
+
+  .pagination {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .title {
@@ -71,6 +76,14 @@
 .logo {
   height: 1em;
   margin-left: 0.5rem;
+}
+
+.sort {
+  border: none;
+  color: $clr-primary-1;
+  background-color: inherit;
+  font-size: 1.3rem;
+  margin: 0.5rem 0;
 }
 
 @media (max-width: 600px) {
